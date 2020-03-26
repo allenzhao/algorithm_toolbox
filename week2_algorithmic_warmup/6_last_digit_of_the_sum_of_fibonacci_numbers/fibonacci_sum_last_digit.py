@@ -1,19 +1,16 @@
 # Uses python3
 import sys
 
+#Credit: https://stackoverflow.com/a/57052717
 def fibonacci_sum_naive(n):
-    if n <= 1:
+    period = 60
+    if n < 2:
         return n
-
-    previous = 0
-    current  = 1
-    sum      = 1
-
-    for _ in range(n - 1):
-        previous, current = current, previous + current
-        sum += current
-
-    return sum % 10
+    n %= period
+    fib = [1, 1]
+    for i in range(n):
+        fib.append((fib[-1] + fib[-2]) % 10 )
+    return (fib[-1] - 1) % 10
 
 if __name__ == '__main__':
     input = sys.stdin.read()

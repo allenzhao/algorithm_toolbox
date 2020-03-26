@@ -4,16 +4,16 @@ from sys import stdin
 def fibonacci_sum_squares_naive(n):
     if n <= 1:
         return n
+    period = 0
+    res = [0, 1]
+    while True:
+        res.append((res[-1] + res[-2])%10)
+        if res[-2:] == [0,1]:
+            period = len(res) - 2
+            break
+    remainder = n % period
 
-    previous = 0
-    current  = 1
-    sum      = 1
-
-    for _ in range(n - 1):
-        previous, current = current, previous + current
-        sum += current * current
-
-    return sum % 10
+    return (res[remainder] * res[remainder + 1]) % 10
 
 if __name__ == '__main__':
     n = int(stdin.read())
